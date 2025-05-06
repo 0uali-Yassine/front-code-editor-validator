@@ -1,8 +1,9 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState} from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Signup from './pages/Singup';
 import Login from './pages/Login';
 import CodeEditor from './components/codeEditor';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -23,16 +24,17 @@ function App() {
   return (
     <Router>
       <div>
+        <ToastContainer/>
         {token && <button onClick={handleLogout}>Logout</button>}
 
         <Routes>
           <Route
             path="/signup"
-            element={!token ? <Signup /> : <Navigate to="/editor" />}
+            element={!token ? <Signup  /> : <Navigate to="/editor" />}
           />
           <Route
             path="/login"
-            element={!token ? <Login onLogin={handleLogin} /> : <Navigate to="/editor" />}
+            element={!token ? <Login   onLogin={handleLogin} /> : <Navigate to="/editor" />}
           />
           <Route
             path="/editor"
