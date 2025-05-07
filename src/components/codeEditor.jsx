@@ -72,8 +72,8 @@ const CodeEditor = () => {
   // }, []);
 
   useEffect(() => {
-    if (data?.code ) {
-      setCode(data?.code)
+    if (data?.code?.code ) {
+      setCode(data?.code?.code)
     }
   }, [data])
 

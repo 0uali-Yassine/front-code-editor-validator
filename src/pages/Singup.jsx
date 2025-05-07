@@ -2,17 +2,22 @@
 
 import { useState } from "react"
 import axios from "axios"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import "../styles/Auth.css"
 
 const Signup = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" })
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
-     const res =  await axios.post("http://localhost:3000/api/signup", form)
-      localStorage.setItem("token", res?.data?.token);
-      alert("Registered! Please log in.")
+      const res = await axios.post("http://localhost:3000/api/signup", form)
+      
+     if(res.status){
+      alert("Registered! Please log in.");
+      navigate('/login');
+     }
+      
     } catch (err) {
       alert("Signup error: " + err.response?.data?.message)
     }
